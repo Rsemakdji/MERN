@@ -138,37 +138,37 @@ exports.deleteAll = (req, res) => {
 exports.login = (req, res) => {
   console.log(req.body);
 
-  User.find({email : req.body.email}).then((data) => {
-      console.log(data);
-      
-      // user trouvé
-      if (data.length > 0) {
-        
-        const user = data[0];
-        if (user.password === req.body.password) {
-          // tout va bien
-          // qu'est ce qu'on renvoit ici ?? --> on renvoi l'id de l'utilisateur. 
-          res.send({
-            id: user.id
-          });
-        }
-        else {
-          // rien ne va
-          res.send({
-            errors: {
-                password: "mauvais mot de passe"
-            }
-          });
-        }
-      } 
-      
-      // user pas trouvé
+  User.find({ email: req.body.email }).then((data) => {
+    console.log(data);
+
+    // user trouvé
+    if (data.length > 0) {
+
+      const user = data[0];
+      if (user.password === req.body.password) {
+        // tout va bien
+        // qu'est ce qu'on renvoit ici ?? --> on renvoi l'id de l'utilisateur. 
+        res.send({
+          id: user.id
+        });
+      }
       else {
+        // rien ne va
         res.send({
           errors: {
-              email: "désole vous n'existez pas blablabla"
+            password: "mauvais mot de passe"
           }
         });
       }
-    });
+    }
+
+    // user pas trouvé
+    else {
+      res.send({
+        errors: {
+          email: "désole vous n'existez pas blablabla"
+        }
+      });
+    }
+  });
 };

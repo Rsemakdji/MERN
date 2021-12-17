@@ -5,12 +5,10 @@ import render from '../../images/render.png';
 function NavBar() {
 
   return (
-
-
     <Fragment>
 
       <Navbar className="Navbar" expand="lg"  >
-        <Navbar.Brand href="/" > <img className="d-inline-block align-top" width="80" height="80" src={render} /></Navbar.Brand>
+        <Navbar.Brand href="/" > <img className="d-inline-block align-top" alt ="logo club" width="80" height="80" src={render} /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="justify-content-end" style={{ width: "100%" }}>
@@ -27,12 +25,12 @@ function NavBar() {
               <NavDropdown.Item href="/PresActiv">PRESENTATION ACTIVITES</NavDropdown.Item>
               <NavDropdown.Item href="/Esprit">ESPRIT JUDO</NavDropdown.Item>
               <NavDropdown.Item href="/Judo">JUDO</NavDropdown.Item>
-              <NavDropdown.Item href="/Juiji">JUIJITSU</NavDropdown.Item>
+              <NavDropdown.Item href="/Jujitsu">JUJITSU</NavDropdown.Item>
               <NavDropdown.Item href="/Taiso">TAISO</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link className="nav-link" href="/Inscription">s'inscrire</Nav.Link>
-            <Nav.Link className="nav-link" href="/Connexion">Connexion</Nav.Link>
-            <Nav.Link className="nav-link" href="/Admin">Admin</Nav.Link>
+            <Nav.Link className="nav-link" href="/Inscription">INSCRIPTION</Nav.Link>
+            <Nav.Link className="nav-link" href="/Connexion">CONNEXION</Nav.Link>
+            <Nav.Link className="nav-link" href="/Admin">ADMINISTRATION</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

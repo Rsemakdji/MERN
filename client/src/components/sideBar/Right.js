@@ -4,12 +4,12 @@ import React from 'react';
 import actu from '../../images/actu.png';
 import contact from '../../images/contact.png';
 
-function RightSide() {
+function Right() {
     return (
         <div className="row">
             <div className="col">
                 <div className="card"><img src={actu} alt="" />
-                    <a href="#">actualités</a>
+                    <a href="/#">actualités</a>
                     <div className="card-body">
                     </div>
                 </div>
@@ -20,11 +20,11 @@ function RightSide() {
                     <div className="card-body">
                     </div>
                 </div>
-                <a href="#">contactez-nous</a>
+                <a href="/#">contactez-nous</a>
             </div>
         </div>
 
     )
 }
 
-export default RightSide;
+export default Right;
