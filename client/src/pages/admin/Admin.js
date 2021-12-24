@@ -1,6 +1,9 @@
 import React from 'react';
 
 import { Row, Nav, Col, Tab} from 'react-bootstrap';
+import TabActu from '../../components/admin/tabs/Actualites';
+import TabInfos from '../../components/admin/tabs/Infos';
+import TabSection from '../../components/admin/tabs/Section';
 import TabUser from '../../components/admin/tabs/User';
 
 
@@ -34,16 +37,15 @@ function Admin() {
                         <Tab.Content className="container">
                             <Tab.Pane eventKey="first">
                             <TabUser></TabUser>
-
                             </Tab.Pane>
                             <Tab.Pane eventKey="second">
-                                <h1>section</h1>
+                                <TabSection></TabSection>
                             </Tab.Pane>
                             <Tab.Pane eventKey="third">
-                                <h1>Infos </h1>
+                                <TabInfos></TabInfos>
                             </Tab.Pane>
                             <Tab.Pane eventKey="fourth">
-                                <h1>Actualiés</h1>
+                                <TabActu></TabActu>
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>

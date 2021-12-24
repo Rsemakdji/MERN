@@ -14,7 +14,7 @@ exports.create = (req, res) => {
     name : req.body.name,
     timetable: req.body.timetable,
     professor: req.body.professor,
-    tariff: req.body.tariff
+    tarif: req.body.tarif
   });
 
   // Save section in the database
