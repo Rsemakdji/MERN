@@ -3,6 +3,9 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 
+
+
+// class et hooks d'etat sur la doc
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
@@ -12,6 +15,8 @@ class SignUp extends React.Component {
     handleSubmit(data) {
         // console log de ce que j'envoi
         // console.log(JSON.stringify(data, null, 2));
+
+        console.log(data.email);
 
         let formData = new FormData();
         formData.append('lastname', data.lastname)
@@ -25,19 +30,16 @@ class SignUp extends React.Component {
 
         axios({
             method: 'post',
-            url: 'http://localhost:9001/api/users/',
+            url: 'http://localhost:9001/api/users/signup',
             data: data
-            
         })
             .then(function (response) {
                 //handle success console log reponse du srv
                 //console.log(response)
                 alert('New User Successfully Added.');
             })
-            .catch(function (response) {
-                //handle error
-                console.log(response)
-                
+            .catch(function (err) {
+                alert("Impossible de créer le compte, le mail existe déjà");
             });
     }
 

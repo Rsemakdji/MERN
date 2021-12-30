@@ -1,7 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import AddModal from '../../modal/AddModal.js';
 import UpdateModal from '../../modal/UpdateModal.js';
 import DeleteModal from '../../modal/DeleteModal.js';
 import axios from 'axios';
+
+
+
 
 function TabActu() {
   const [data, setData] = useState([]);
@@ -17,18 +21,7 @@ function TabActu() {
     fetchDatas();
   }, [])
 
-  const editItem = (editedElement) => {
-
-    // editedElement.id
-    // editedElement.title
-    // editedElement.description
-    
-    //let element = data.filter(id === editedElement.id);
-    // element.title = editedElement.title;
-    // element.description = editedElement.description;
-    
-    // console.log(message);
-  };
+  
 
   return (
     <div className="tableau-infos">
@@ -40,6 +33,7 @@ function TabActu() {
               <td>id</td>
               <td>title</td>
               <td>description</td>
+              <td>Ajouter</td>
               <td>modifier</td>
               <td>supprimer</td>
             </tr>
@@ -51,11 +45,13 @@ function TabActu() {
                       <td>{item.id}</td>
                       <td>{item.title}</td>
                       <td>{item.description}</td>
+                      <td><AddModal></AddModal></td>
                       <td><UpdateModal></UpdateModal></td>
-                      <td><DeleteModal validateChanges={editItem} id={item.id} title={item.title} description={item.description}></DeleteModal></td>
+                      <td><DeleteModal></DeleteModal></td>
                     </tr>
                   )
               }
+              
             </Fragment>
           </tbody>
         </Fragment>

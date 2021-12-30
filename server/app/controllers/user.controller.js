@@ -1,14 +1,35 @@
 const db = require("../models");
 const User = db.users;
+const jsonwebtoken = require('jsonwebtoken');
+const jwtSecret = 'rrrrrrrrrrrrrrrrrrrrrrrrr';
 // const Section = db.sections;
 
 // Create and Save a new User
-exports.create = (req, res) => {
+exports.signup = async (req, res) => {
   // Validate request
+
+  const errors = {};
+
   if (!req.body.lastname) {
     res.status(400).send({ message: "Name can not be empty!" });
     return;
   }
+
+  console.log("0");
+
+  // vérification de l'existence de l'utilisateur en base (par le mail)
+  const data = await User.find({ email: req.body.email });
+  console.log("1");
+
+  if (data.length > 0) {
+    // https://stackoverflow.com/questions/3825990/http-response-code-for-post-when-resource-already-exists
+
+    console.log("2");
+    errors.email = "désolé mais le mail existe déjà";
+    return res.status(409).send(errors);
+  }
+
+  console.log("3");
 
   // Create a User
   const user = new User({
@@ -19,8 +40,10 @@ exports.create = (req, res) => {
     adress: req.body.adress,
     city: req.body.city,
     postal: req.body.postal,
-    password: req.body.password
+    password: req.body.password,
+    // isAdmin: false, // <--  todo : décommenter 
   });
+
 
   // Save User in the database
   user
@@ -145,16 +168,24 @@ exports.login = (req, res) => {
     if (data.length > 0) {
 
       const user = data[0];
+      // password match
       if (user.password === req.body.password) {
-        // tout va bien
-        // qu'est ce qu'on renvoit ici ?? --> on renvoi l'id de l'utilisateur. 
-        res.send({
-          id: user.id
-        });
+        
+        const token = jsonwebtoken.sign(
+          { 
+            email : user.email,
+            isAdmin : true // user.isAdmin,
+          }, // payload
+          jwtSecret // secret
+        );
+
+        res.send({token});
       }
+
+
+      // mauvais password
       else {
-        // rien ne va
-        res.send({
+        res.status(401).send({
           errors: {
             password: "mauvais mot de passe"
           }
@@ -164,11 +195,13 @@ exports.login = (req, res) => {
 
     // user pas trouvé
     else {
-      res.send({
+      res.status(409).send({
         errors: {
-          email: "désole vous n'existez pas blablabla"
+          email: "utilisateur non trouvé"
         }
       });
     }
+
+
   });
 };
