@@ -1,19 +1,33 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom'
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
 
 
 function TabUser() {
     const [data, setData] = useState([]);
+    
+    async function fetchData() {
+        const storedJwt = localStorage.getItem('token');
+        if (storedJwt) {
+            try {
+                const config = {
+                    headers: { Authorization: `Bearer ${storedJwt}` }
+                };
+                const result = await axios.get('http://localhost:9001/api/users', config);
+                setData(result.data);
+            }
+            catch (err) {
+                // TODO : gérer les cas d'erreur
+            }
+        } else {
+            return <Redirect to='/Connexion' /> // TODO : redirection correcte
+        }
+    }
 
     useEffect(() => {
-        const fetchDatas = async () => {
-            const result = await axios.get('http://localhost:9001/api/users',
-            );
-            setData(result.data);
-        };
-        fetchDatas();
-    }, [])
+        fetchData();
+    }, []);
 
     const handleDelete = async (id) => {
         console.log(id);

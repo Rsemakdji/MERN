@@ -1,7 +1,8 @@
 const db = require("../models");
 const User = db.users;
 const jsonwebtoken = require('jsonwebtoken');
-const jwtSecret = 'rrrrrrrrrrrrrrrrrrrrrrrrr';
+const { jwtSecret } = require("../config/jwt.config");
+
 // const Section = db.sections;
 
 // Create and Save a new User
@@ -15,21 +16,15 @@ exports.signup = async (req, res) => {
     return;
   }
 
-  console.log("0");
-
   // vérification de l'existence de l'utilisateur en base (par le mail)
   const data = await User.find({ email: req.body.email });
-  console.log("1");
 
   if (data.length > 0) {
     // https://stackoverflow.com/questions/3825990/http-response-code-for-post-when-resource-already-exists
 
-    console.log("2");
     errors.email = "désolé mais le mail existe déjà";
     return res.status(409).send(errors);
   }
-
-  console.log("3");
 
   // Create a User
   const user = new User({
@@ -61,10 +56,7 @@ exports.signup = async (req, res) => {
 
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
-  const lastname = req.query.lastname;
-  var condition = lastname ? { lastname: { $regex: new RegExp(lastname), $options: "i" } } : {};
-
-  User.find(condition)
+  User.find({})
     .then(data => {
       res.send(data);
     })
@@ -157,7 +149,15 @@ exports.deleteAll = (req, res) => {
     });
 };
 
+
+
+
+
+
+
 // *****************  login  ************************
+
+
 exports.login = (req, res) => {
   console.log(req.body);
 
@@ -179,7 +179,7 @@ exports.login = (req, res) => {
           jwtSecret // secret
         );
 
-        res.send({token});
+        res.send({ token });
       }
 
 

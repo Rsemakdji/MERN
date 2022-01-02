@@ -18,15 +18,15 @@ class SignUp extends React.Component {
 
         console.log(data.email);
 
-        let formData = new FormData();
-        formData.append('lastname', data.lastname)
-        formData.append('firstname', data.firstname)
-        formData.append('email', data.email)
-        formData.append('phone', data.phone)
-        formData.append('adress', data.adress)
-        formData.append('postal', data.postal)
-        formData.append('city', data.city)
-        formData.append('password', data.password)
+        // let formData = new FormData();
+        // formData.append('lastname', data.lastname)
+        // formData.append('firstname', data.firstname)
+        // formData.append('email', data.email)
+        // formData.append('phone', data.phone)
+        // formData.append('adress', data.adress)
+        // formData.append('postal', data.postal)
+        // formData.append('city', data.city)
+        // formData.append('password', data.password)
 
         axios({
             method: 'post',

@@ -1,3 +1,4 @@
 module.exports = {
-    jwtSecret : 'lesecretclaviequilechoisisjefaisdujudotoutletempcestchiant'
-  };
+  jwtSecret : 'lesecretclaviequilechoisisjefaisdujudotoutletempcestchiant',
+  jwtAlgo : 'H256',
+};

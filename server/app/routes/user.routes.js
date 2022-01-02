@@ -3,9 +3,7 @@ const jwt = require('express-jwt');
 
 const users = require("../controllers/user.controller.js");
 //a mettre dans la config
-const jwtSecret = 'rrrrrrrrrrrrrrrrrrrrrrrrr';
-
-
+const { jwtSecret } = require("../config/jwt.config");
 
 
 // auth 
@@ -25,6 +23,10 @@ router.delete("/:id", users.delete);
 
 // Create a new Tutorial
 router.delete("/", users.deleteAll);
+
+
+
+// PRIVATE ROUTES
 
 router.use(jwt({ secret: jwtSecret, algorithms: ['HS256'] }));
 
