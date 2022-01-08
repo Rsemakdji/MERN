@@ -2,16 +2,16 @@ import React, {  useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 
+//hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 
+function DeleteModal() {
 
-function DeleteModal({validateChanges, id, title, desccription}) {
-
-    // validateChanges("pouet pouet");
-
+   
+// composant modal
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+// composant de données 
     const [data, setData] = useState([]);
 
     /*const [editedElement, setEditedElement] = useState({
@@ -19,9 +19,15 @@ function DeleteModal({validateChanges, id, title, desccription}) {
         title: title,
         description: description,
     });*/
-
+    
+    /*const handleSubmit = (e) => {
+        e.preventDefault();
+        validateChanges(editedElement);
+        handleClose();
+    };*/
     
     useEffect(() => {
+       
         const fetchDatas = async () => {
             const result = await axios.get('http://localhost:9001/api/actualites',
             );
@@ -31,18 +37,20 @@ function DeleteModal({validateChanges, id, title, desccription}) {
     }, [])
     
     
-    const handleDelete = async (title) => {
+    const handleDelete = async (id) => {
+        const storedJwt = localStorage.getItem('token');
+        const config = {
+            headers: { Authorization: `Bearer ${storedJwt}` }
+        };
         axios
-            .delete(`http://localhost:9001/api/actualites${title}`)
-            .then(res => {  
+            .delete(`http://localhost:9001/api/users/${id}`, config)
+            .then(res => {
+                // trouver comment mettre le prenom et nom dans le message d'erreur !
+                alert(`tu as supprimer ${id}`)
+                window.location.href = "/Admin";
             });
     }
 
-    /*const handleSubmit = (e) => {
-        e.preventDefault();
-        validateChanges(editedElement);
-        handleClose();
-    };*/
 
     return (
         <>
@@ -55,21 +63,6 @@ function DeleteModal({validateChanges, id, title, desccription}) {
                     <Modal.Title> Suppression </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
-                {/* <form onSubmit={handleSubmit}>
-                
-                    <input type="text" value={editedElement.title}></input>
-                    <input type="text" value={editedElement.description}></input>                    
-                    
-                    <button type="submit"></button>
-                </form> */}
-
-                  {
-                  data.map((item, i) => 
-                  <tr key={i}>
-                      <td>{item.title}</td>
-                  </tr>)
-                  }   
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

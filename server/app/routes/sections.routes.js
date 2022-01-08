@@ -9,13 +9,13 @@ router.post("/", sections.create);
 router.get("/", sections.findAll);
 
 // // Retrieve a single sections with name
-router.get("/:name", sections.findOne);
+router.get("/:id", sections.findOne);
 
 // // Update a sections with name
-router.put("/:name", sections.update);
+router.put("/:id", sections.update);
 
 // // Delete a sections with name
-router.delete("/:name", sections.delete);
+router.delete("/:id", sections.delete);
 
 // // delete all the sections
 router.delete("/", sections.deleteAll);

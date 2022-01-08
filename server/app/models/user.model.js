@@ -8,7 +8,8 @@ module.exports = mongoose => {
       adress: String,
       city: String,
       postal: String,
-      password: String, 
+      password: String,
+      isAdmin: Boolean,
     },
     { timestamps: true }
   );

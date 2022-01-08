@@ -10,13 +10,13 @@ router.post("/", informations.create);
 router.get("/", informations.findAll);
 
 // // Retrieve a single information with title
-router.get("/:title", informations.findOne);
+router.get("/:id", informations.findOne);
 
 // // Update a information with title
-router.put("/:title", informations.update);
+router.put("/:id", informations.update);
 
 // // Delete a information with title
-router.delete("/:title", informations.delete);
+router.delete("/:id", informations.delete);
 
 // // delete all the information
 router.delete("/", informations.deleteAll);

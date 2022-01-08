@@ -5,27 +5,6 @@ import axios from 'axios';
 
 
 
-// import { utils } from '../../tools';
-
-// const utils = {
-//   requestWithJwt : (url) => {
-//     const storedJwt = localStorage.getItem("token");
-
-//     if (storedJwt) {
-//       try {
-//         const config = {
-//             headers: { Authorization: `Bearer ${storedJwt}` }
-//         };
-//         const response = await axios.get(url, config); // todo : faire la requête côté serveur
-//         return response;
-//       }
-//       catch (err) {
-//         console.log("désolé il y a un problème de vévrification des informations utilisateur");
-//       }
-//     }
-//   }
-// };
-
 
 function NavBar() {
 
@@ -33,22 +12,25 @@ function NavBar() {
 
   async function getUserInformations() {
     const storedJwt = localStorage.getItem("token");
-
-    if (storedJwt) {
-      try {
-        const config = {
-          headers: { Authorization: `Bearer ${storedJwt}` }
-        };
-        const response = await axios.get("http://localhost:9001/api/users/getinfo", config); // todo : faire la requête côté serveur
-        setIsAdmin(response.data.isAdmin);
-      }
-      catch (err) {
-        console.log("désolé il y a un problème de vévrification des informations utilisateur");
-      }
+    if (!storedJwt) {
+      setIsAdmin(false);
+      return;
+    }
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${storedJwt}` }
+      };
+      const response = await axios.get("http://localhost:9001/api/users/getInfo", config);
+      console.log({ isAdmin: response.data.isAdmin });
+      setIsAdmin(response.data.isAdmin);
+    }
+    catch (err) {
+      console.log("Désolé il y a un problème de vévrification des informations utilisateur");
     }
   }
 
-  useEffect(getUserInformations, []);
+  useEffect(getUserInformations, []); // la ligne du use effect a réctifier //
+
 
   return (
     <Fragment>
@@ -76,15 +58,36 @@ function NavBar() {
             </NavDropdown>
             <Nav.Link className="nav-link" href="/Inscription">INSCRIPTION</Nav.Link>
             <Nav.Link className="nav-link" href="/Connexion">CONNEXION</Nav.Link>
-            {isAdmin && <Nav.Link className="nav-link" href="/Admin">ADMINISTRATION</Nav.Link>}
+            {isAdmin && <Nav.Link className="nav-link" href="/Admin"> ADMINISTRATION</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
     </Fragment>
-
-
   )
 }
+
+
+
+// import { utils } from '../../tools';
+
+// const utils = {
+//   requestWithJwt : (url) => {
+//     const storedJwt = localStorage.getItem("token");
+
+//     if (storedJwt) {
+//       try {
+//         const config = {
+//             headers: { Authorization: `Bearer ${storedJwt}` }
+//         };
+//         const response = await axios.get(url, config); // todo : faire la requête côté serveur
+//         return response;
+//       }
+//       catch (err) {
+//         console.log("désolé il y a un problème de vévrification des informations utilisateur");
+//       }
+//     }
+//   }
+// };
 
 
 

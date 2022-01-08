@@ -5,14 +5,14 @@ const Actualites = db.actualites;
 // Create and Save a new informations
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  if (!req.body.id) {
     res.status(400).send({ message: "informations can not be empty!" });
     return;
   }
 
   // Create a actualites
   const actualites = new Actualites({
-    title: req.body.title,
+    id: req.body.id,
     description: req.body.description,
   });
 
@@ -33,8 +33,8 @@ exports.create = (req, res) => {
 
 // Retrieve all actualites from the database.
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+  const id = req.query.id;
+  var condition = id ? { id: { $regex: new RegExp(id), $options: "i" } } : {};
 
   Actualites.find(condition)
     .then(data => {
@@ -49,9 +49,9 @@ exports.findAll = (req, res) => {
 };
 // Find a single actualites with an title
 exports.findOne = (req, res) => {
-  const title = req.params.title;
+  const id = req.params.id;
 
-  Actualites.findById(title)
+  Actualites.findById(id)
     .then(data => {
       if (!data)
         res.status(404).send({ message: "Not found actualites with title " + title });
@@ -72,7 +72,7 @@ exports.update = (req, res) => {
     });
   }
 
-  const title = req.params.title;
+  const id= req.params.id;
 
   Actualites.findByIdAndUpdate(title, req.body, { useFindAndModify: false })
     .then(data => {
@@ -91,23 +91,23 @@ exports.update = (req, res) => {
 
 // Delete a actualites with the specified title in the request
 exports.delete = (req, res) => {
-  const title = req.params.title;
+  const id = req.params.id;
 
-  Actualites.findByIdAndRemove(title, { useFindAndModify: false })
+  Actualites.findByIdAndRemove(id, { useFindAndModify: false })
     .then(data => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot delete actualites with title=${title}. Maybe actualites was not found!`
+          message: `Cannot delete actualites with title=${id}. Maybe actualites was not found!`
         });
       } else {
         res.send({
-          message: "actualites was deleted successfully!"
+          message: "actualites " + title + " was deleted successfully!"
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete actualites with title=" + title
+        message: "Could not delete actualites with title=" + id + title
       });
     });
 };

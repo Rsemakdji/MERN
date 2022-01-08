@@ -5,6 +5,62 @@ const { jwtSecret } = require("../config/jwt.config");
 
 // const Section = db.sections;
 
+exports.getInfo = async (req, res) => {
+  if (!req.user)
+    return res.status(401).send({ error: "problème d'authentification de l'utilisateur" });
+
+  return res.send({
+    isAdmin: req.user.isAdmin,
+    email: req.user.email,
+  });
+};
+
+// Log user and create JWT token
+exports.login = (req, res) => {
+  console.log(req.body);
+
+  User.find({ email: req.body.email }).then((data) => {
+    console.log(data);
+
+    // user trouvé
+    if (data.length > 0) {
+
+      const user = data[0];
+      // password match
+      if (user.password === req.body.password) {
+
+        const token = jsonwebtoken.sign(
+          {
+            email: user.email,
+            isAdmin: user.isAdmin,
+          }, // payload
+          jwtSecret // secret
+        );
+
+        res.send({ token });
+      }
+
+      // mauvais password
+      else {
+        res.status(401).send({
+          errors: {
+            password: "mauvais mot de passe"
+          }
+        });
+      }
+    }
+
+    // user pas trouvé
+    else {
+      res.status(409).send({
+        errors: {
+          email: "utilisateur non trouvé"
+        }
+      });
+    }
+  });
+};
+
 // Create and Save a new User
 exports.signup = async (req, res) => {
   // Validate request
@@ -24,9 +80,24 @@ exports.signup = async (req, res) => {
 
     errors.email = "désolé mais le mail existe déjà";
     return res.status(409).send(errors);
+
   }
 
+
+  // verificaton Admin 
+
+  const getInfo = await User.find({ isAdmin: req.body.isAdmin });
+
+  if (getInfo.length > 0) {
+    errors.isAdmin = "vous n'avez pas les droit nécessaire ";
+    return res.status(409).send(errors);
+
+  }
+
+
   // Create a User
+
+
   const user = new User({
     lastname: req.body.lastname,
     firstname: req.body.firstname,
@@ -36,7 +107,7 @@ exports.signup = async (req, res) => {
     city: req.body.city,
     postal: req.body.postal,
     password: req.body.password,
-    // isAdmin: false, // <--  todo : décommenter 
+    isAdmin: false,
   });
 
 
@@ -147,61 +218,4 @@ exports.deleteAll = (req, res) => {
           err.message || "Some error occurred while removing all users."
       });
     });
-};
-
-
-
-
-
-
-
-// *****************  login  ************************
-
-
-exports.login = (req, res) => {
-  console.log(req.body);
-
-  User.find({ email: req.body.email }).then((data) => {
-    console.log(data);
-
-    // user trouvé
-    if (data.length > 0) {
-
-      const user = data[0];
-      // password match
-      if (user.password === req.body.password) {
-        
-        const token = jsonwebtoken.sign(
-          { 
-            email : user.email,
-            isAdmin : true // user.isAdmin,
-          }, // payload
-          jwtSecret // secret
-        );
-
-        res.send({ token });
-      }
-
-
-      // mauvais password
-      else {
-        res.status(401).send({
-          errors: {
-            password: "mauvais mot de passe"
-          }
-        });
-      }
-    }
-
-    // user pas trouvé
-    else {
-      res.status(409).send({
-        errors: {
-          email: "utilisateur non trouvé"
-        }
-      });
-    }
-
-
-  });
 };

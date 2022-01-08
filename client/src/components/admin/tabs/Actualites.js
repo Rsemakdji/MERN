@@ -12,7 +12,7 @@ function TabActu() {
 
   //ressemble a didmount et didUpdate
   useEffect(() => {
-    const fetchDatas = async () => {
+    async function fetchDatas() {
       const result = await axios.get('http://localhost:9001/api/actualites',
       );
       setData(result.data);
@@ -21,11 +21,12 @@ function TabActu() {
     fetchDatas();
   }, [])
 
-  
+
 
   return (
     <div className="tableau-infos">
       <h1>Modification infos</h1>
+
       <table border="1" className="table table-striped table-dark">
         <Fragment>
           <tbody>
@@ -33,7 +34,6 @@ function TabActu() {
               <td>id</td>
               <td>title</td>
               <td>description</td>
-              <td>Ajouter</td>
               <td>modifier</td>
               <td>supprimer</td>
             </tr>
@@ -45,17 +45,17 @@ function TabActu() {
                       <td>{item.id}</td>
                       <td>{item.title}</td>
                       <td>{item.description}</td>
-                      <td><AddModal></AddModal></td>
-                      <td><UpdateModal></UpdateModal></td>
-                      <td><DeleteModal></DeleteModal></td>
+                      <UpdateModal></UpdateModal>
+                      <DeleteModal></DeleteModal>
                     </tr>
                   )
               }
-              
             </Fragment>
           </tbody>
         </Fragment>
       </table>
+      <div><AddModal></AddModal></div>
+
     </div>
   )
 }

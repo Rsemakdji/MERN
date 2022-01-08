@@ -3,7 +3,7 @@ import './App.css';
 
 //components
 import Road from './components/navigation/Road';
-import NavBar from './components/navigation/navBar.jsx';
+import NavBar from './components/navigation/NavBar.jsx';
 
 
 class App extends Component {

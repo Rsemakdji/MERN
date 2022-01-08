@@ -8,7 +8,6 @@ import SignUp from '../../components/formulaires/SignUp';
 function Inscription() {
     return (
         <div className="">
-            <h1> INSCRIPTION </h1>
             <hr className="my-5" />
             <div className="container">
                 <SignUp></SignUp>

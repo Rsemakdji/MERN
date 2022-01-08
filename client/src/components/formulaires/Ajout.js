@@ -38,7 +38,7 @@ class AjouterActu extends Component
                 className="form-control" 
                 name='title'
                 type="text" 
-                placeholder="titre de l'actualités"
+                placeholder=""
                 value= {this.state.title}
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
@@ -49,7 +49,7 @@ class AjouterActu extends Component
                 className="form-control" 
                 type="text" 
                 name='description'
-                placeholder="nouvelle actualités" 
+                placeholder="" 
                 value= {this.state.description}
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}

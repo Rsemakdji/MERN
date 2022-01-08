@@ -5,38 +5,23 @@ import axios from 'axios';
 
 
 
+
 // class et hooks d'etat sur la doc
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+    
     handleSubmit(data) {
-        // console log de ce que j'envoi
-        // console.log(JSON.stringify(data, null, 2));
-
-        console.log(data.email);
-
-        // let formData = new FormData();
-        // formData.append('lastname', data.lastname)
-        // formData.append('firstname', data.firstname)
-        // formData.append('email', data.email)
-        // formData.append('phone', data.phone)
-        // formData.append('adress', data.adress)
-        // formData.append('postal', data.postal)
-        // formData.append('city', data.city)
-        // formData.append('password', data.password)
-
         axios({
             method: 'post',
             url: 'http://localhost:9001/api/users/signup',
             data: data
         })
             .then(function (response) {
-                //handle success console log reponse du srv
-                //console.log(response)
-                alert('New User Successfully Added.');
+                window.location.href = "/Connexion";
+
             })
             .catch(function (err) {
                 alert("Impossible de créer le compte, le mail existe déjà");
@@ -86,14 +71,14 @@ class SignUp extends React.Component {
         }
 
         return (
-            <div className="container" style={{ padding: 20 }}>
+            <div className="container" style={{ padding: 50 }}>
                 <div className="register-form"><h1>s'inscrire c'est ici ! </h1>
                     <Formik
                         initialValues={initialValues}
                         validationSchema={this.validationSchema}
                         onSubmit={this.handleSubmit}>
 
-                        {({ resetForm }) => (
+                        {
                             <Form>
                                 <div className="form-group">
                                     <label>nom</label>
@@ -149,21 +134,18 @@ class SignUp extends React.Component {
                                 <div className="form-group form-check"><br />
                                     <Field name="acceptTerms" type="checkbox" className="form-check-input" />
                                     <label htmlFor="acceptTerms" className="form-check-label">
-                                        I have read and agree to the Terms
+                                        j'accepte les conditions d'utilisation 
                                     </label>
                                     <ErrorMessage name="acceptTerms" component="div" className="text-danger" />
                                 </div>
-
+                                <br></br>
                                 <div className="form-group">
-                                    <button type="submit" className="btn btn-primary">
-                                        Register
-                                    </button>
-                                    <button type="button" onClick={resetForm} className="btn btn-warning">
-                                        Reset
+                                    <button type="submit" className="btn-success">
+                                        s'inscrire
                                     </button>
                                 </div>
                             </Form>
-                        )}
+                        }
                     </Formik>
                 </div>
             </div>

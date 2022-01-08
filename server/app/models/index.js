@@ -8,14 +8,14 @@ const db = {
     url : dbConfig.url,
 };
 
-console.log(db.mongoose);
-console.log(mongoose);
-console.log(db);
+// console.log(db.mongoose);
+// console.log(mongoose);
+// console.log(db);
 
 // models
 db.users = require("./user.model.js")(mongoose);
 db.informations = require("./informations.model.js")(mongoose);
 db.actualites = require("./actualites.model.js")(mongoose);
 db.section = require("./sections.model.js")(mongoose);
-console.log(db);
+// console.log(db);
 module.exports = db;

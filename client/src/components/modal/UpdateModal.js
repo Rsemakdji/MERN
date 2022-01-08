@@ -16,6 +16,13 @@ function UpdateModal() {
           <Button variant="btn btn-primary" onClick={handleShow}>
             Modifier
           </Button>
+          {/* <form onSubmit={handleSubmit}>
+                
+                    <input type="text" value={editedElement.title}></input>
+                    <input type="text" value={editedElement.description}></input>                    
+                    
+                    <button type="submit"></button>
+                </form> */}
     
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>

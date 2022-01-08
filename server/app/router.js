@@ -15,6 +15,7 @@ module.exports = app => {
     app.use(express.urlencoded({ extended: true }));
 
     // Home route
+    
     app.get("/", (req, res) => {
         //throw new Error();
         res.json({ message: "Welcome to judoclub application." });
