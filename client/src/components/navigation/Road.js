@@ -4,7 +4,7 @@ import React from 'react';
 // import page 
 import Accueil from '../../pages/Accueil.js';
 import Infos from '../../pages/club/Infos.js';
-import News from '../../pages/club/News';
+import Actu from '../../pages/club/Actu';
 import Admin from '../../pages/admin/Admin.js';
 import Judo from '../../pages/activites/Judo.js';
 import Jujitsu from '../../pages/activites/Jujitsu.js';
@@ -25,7 +25,7 @@ function Road() {
         <Switch>
           <Route path="/" exact component={Accueil} />
           <Route path="/Infos" exact component={Infos} />
-          <Route path="/Actualites" exact component={News} />
+          <Route path="/Actualites" exact component={Actu} />
           <Route path="/Admin" exact component={Admin} />
           <Route path="/Judo" exact component={Judo} />
           <Route path="/Jujitsu" exact component={Jujitsu} />

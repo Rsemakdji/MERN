@@ -3,7 +3,6 @@ const User = db.users;
 const jsonwebtoken = require('jsonwebtoken');
 const { jwtSecret } = require("../config/jwt.config");
 
-// const Section = db.sections;
 
 exports.getInfo = async (req, res) => {
   if (!req.user)
@@ -68,7 +67,7 @@ exports.signup = async (req, res) => {
   const errors = {};
 
   if (!req.body.lastname) {
-    res.status(400).send({ message: "Name can not be empty!" });
+    res.status(400).send({ message: "Name cant not be empty!" });
     return;
   }
 
@@ -103,7 +102,7 @@ exports.signup = async (req, res) => {
     firstname: req.body.firstname,
     email: req.body.email,
     phone: req.body.phone,
-    adress: req.body.adress,
+    address: req.body.address,
     city: req.body.city,
     postal: req.body.postal,
     password: req.body.password,

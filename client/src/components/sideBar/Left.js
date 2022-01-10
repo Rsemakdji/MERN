@@ -13,7 +13,7 @@ function Left() {
                     <div className="card-body">
                     </div>
                 </div>
-                <a href="/#">informations importantes</a>
+                <a href="/Infos">Informations importantes</a>
             </div>
             <div className="w-100"></div>
             <div className="col">
@@ -21,7 +21,7 @@ function Left() {
                     <div className="card-body">
                     </div>
                 </div>
-                <a href="/#">calendrier</a>
+                <a href="/#">lien vers autre chose</a>
             </div>
         </div>
 

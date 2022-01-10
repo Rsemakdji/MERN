@@ -1,4 +1,8 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import AddModal from '../../modal/infos/AddModal';
+import UpdateModal from '../../modal/infos/UpdateModal';
+import DeleteModal from '../../modal/infos/DeleteModal';
+
 import axios from 'axios'
 
 
@@ -6,66 +10,45 @@ import axios from 'axios'
 
 
 function TabInfos () {
+
     const [data, setData] = useState([]);
     
-  
-    //ressemble a didmount et didUpdate
     useEffect (() => {
-      const fetchDatas = async () =>{
-      const result = await axios.get('http://localhost:9001/api/informations',
-        );
+      const fetchDatas = async () => {
+      const result = await axios.get('http://localhost:9001/api/informations');
         setData(result.data);
-        //console.log(result.data);
       };
-        fetchDatas();
+      fetchDatas();
     }, [])
-  
-    
-  
-    const handleDelete = async (title) => {
-      //console.log(title);
-      axios
-        .delete(`http://localhost:9001/api/informations${title}`)
-        .then(res => {
-         // console.log(res);
-         // console.log(res.data);
-        });
-    }
-  
-    const handleChange = async (id) => {
-     // console.log(id);
-      
-    }
-  
+
     return(
       <div className="tableau-infos">
-        <h1>Modification infos</h1>
-          <table border="1" className="table table-striped table-dark">
-            <Fragment>
-              <tbody>
-                  <tr>
-                      <td>title</td>
-                      <td>description</td>  
-                      <td>modifier</td> 
-                      <td>supprimer</td> 
-                  </tr>
-                  <Fragment>
-                    {
-                      data
-                        .map((item,i)=>
-                          <tr key ={i}>
-                            <td>{item.title}</td> 
-                            <td>{item.description}</td>  
-                            <td><button className="btn btn-primary" onClick={() => { handleChange(item.id) } }>modifier</button></td>
-                            <td><button className="btn btn-danger" onClick={() => { handleDelete(item.id) } }>supprimer</button></td>
-                          </tr>
-                        )
-                    }
-                </Fragment>
-              </tbody>
-            </Fragment>
-          </table>
-      </div>
+      <h1>Modification des informations </h1>
+      <table border="1" className="table table-striped table-dark">
+        <thead>
+          <tr>
+            <td>Titre</td>
+            <td>Description</td>
+            <td>Modifier</td>
+            <td>Supprimer</td>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            data
+              .map((item) =>
+                <tr key={item.id}>
+                  <td>{item.title}</td>
+                  <td>{item.description}</td>
+                  <td><div><UpdateModal id={item.id} title={item.title} description={item.description} ></UpdateModal></div></td>
+                  <td><div><DeleteModal id={item.id} title={item.title} description={item.description}></DeleteModal></div></td>
+                </tr>
+              )
+          }
+        </tbody>
+      </table>
+      <AddModal></AddModal>
+    </div> 
     )
   }
   export default TabInfos;

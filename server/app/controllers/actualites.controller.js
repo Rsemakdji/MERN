@@ -5,14 +5,14 @@ const Actualites = db.actualites;
 // Create and Save a new informations
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.id) {
-    res.status(400).send({ message: "informations can not be empty!" });
+  if (!req.body.title) {
+    res.status(400).send({ message: "actualites cant be empty!" });
     return;
   }
 
   // Create a actualites
   const actualites = new Actualites({
-    id: req.body.id,
+    title: req.body.title,
     description: req.body.description,
   });
 
@@ -34,7 +34,7 @@ exports.create = (req, res) => {
 // Retrieve all actualites from the database.
 exports.findAll = (req, res) => {
   const id = req.query.id;
-  var condition = id ? { id: { $regex: new RegExp(id), $options: "i" } } : {};
+  var condition = id ? { id: { $regex: new RegExp(title), $options: "i" } } : {};
 
   Actualites.find(condition)
     .then(data => {
@@ -47,24 +47,24 @@ exports.findAll = (req, res) => {
       });
     });
 };
-// Find a single actualites with an title
+// Find a single actualites with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
   Actualites.findById(id)
     .then(data => {
       if (!data)
-        res.status(404).send({ message: "Not found actualites with title " + title });
+        res.status(404).send({ message: "Not found actualites with id " + id });
       else res.send(data);
     })
     .catch(err => {
       res
         .status(500)
-        .send({ message: "Error retrieving actualites with title=" + title });
+        .send({ message: "Error retrieving actualites with id=" + id });
     });
 };
 
-// Update a actualites by the title in the request
+// Update a actualites by the id in the request
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
@@ -72,24 +72,25 @@ exports.update = (req, res) => {
     });
   }
 
-  const id= req.params.id;
+  const id = req.params.id;
 
-  Actualites.findByIdAndUpdate(title, req.body, { useFindAndModify: false })
+  Actualites.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then(data => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update infos with title=${title}. Maybe actualites was not found!`
+          message: `Cannot update infos with id=${id}. Maybe actualites was not found!`
         });
-      } else res.send({ message: "actualites was updated successfully." });
+      } else
+        res.send({ message: "actualites was updated successfully." });
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating actualites with title=" + title
+        message: `Error updating actualites with id=${id}`
       });
     });
 };
 
-// Delete a actualites with the specified title in the request
+// Delete a actualites with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
 
@@ -97,17 +98,17 @@ exports.delete = (req, res) => {
     .then(data => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot delete actualites with title=${id}. Maybe actualites was not found!`
+          message: `Cannot delete actualites with title=${title}. Maybe actualites was not found!`
         });
       } else {
         res.send({
-          message: "actualites " + title + " was deleted successfully!"
+          message: "informations was deleted successfully!"
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete actualites with title=" + id + title
+        message: "Could not delete infos with title=" + title
       });
     });
 };

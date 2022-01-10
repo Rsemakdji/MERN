@@ -1,46 +1,46 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import axios from 'axios'
+import React from 'react';
+
 
 
 
 
 
 function TabSection () {
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([]);
     
   
-    //ressemble a didmount et didUpdate
-    useEffect (() => {
-      const fetchDatas = async () =>{
-      const result = await axios.get('http://localhost:9001/api/sections',
-        );
-        setData(result.data);
-        //console.log(result.data);
-      };
-        fetchDatas();
-    }, [])
+    // //ressemble a didmount et didUpdate
+    // useEffect (() => {
+    //   const fetchDatas = async () =>{
+    //   const result = await axios.get('http://localhost:9001/api/sections',
+    //     );
+    //     setData(result.data);
+    //     //console.log(result.data);
+    //   };
+    //     fetchDatas();
+    // }, [])
   
     
   
-    const handleDelete = async (title) => {
-      //console.log(title);
-      axios
-        .delete(`http://localhost:9001/api/sections${title}`)
-        .then(res => {
-         // console.log(res);
-          //console.log(res.data);
-        });
-    }
+    // const handleDelete = async (title) => {
+    //   //console.log(title);
+    //   axios
+    //     .delete(`http://localhost:9001/api/sections${title}`)
+    //     .then(res => {
+    //      // console.log(res);
+    //       //console.log(res.data);
+    //     });
+    // }
   
-    const handleChange = async (id) => {
-      console.log(id);
+    // const handleChange = async (id) => {
+    //   console.log(id);
       
-    }
+   // }
   
     return(
       <div className="tableau-infos">
-        <h1>Modification infos</h1>
-          <table border="1" className="table table-striped table-dark">
+        <h1>Modification de la section</h1>
+          {/* <table border="1" className="table table-striped table-dark">
             <Fragment>
               <tbody>
                   <tr>
@@ -68,7 +68,7 @@ function TabSection () {
                 </Fragment>
               </tbody>
             </Fragment>
-          </table>
+          </table> */}
       </div>
     )
   }

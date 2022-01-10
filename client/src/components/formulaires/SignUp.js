@@ -40,7 +40,7 @@ class SignUp extends React.Component {
                 .email('Email is invalid'),
             phone: Yup.string()
                 .required('téléphoooone'),
-            adress: Yup.string()
+            address: Yup.string()
                 .required('adress is required'),
             city: Yup.string()
                 .required('adress is required'),
@@ -62,7 +62,7 @@ class SignUp extends React.Component {
             lastname: '',
             firstname: '',
             phone: '',
-            adress: '',
+            address: '',
             city: '',
             postal: '',
             email: '',
@@ -102,9 +102,9 @@ class SignUp extends React.Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="adress"> adresse  </label>
-                                    <Field name="adress" type="text" className="form-control" />
-                                    <ErrorMessage name="adress" component="div" className="text-danger" />
+                                    <label htmlFor="address"> adresse  </label>
+                                    <Field name="address" type="text" className="form-control" />
+                                    <ErrorMessage name="address" component="div" className="text-danger" />
                                 </div>
 
                                 <div className="form-group">

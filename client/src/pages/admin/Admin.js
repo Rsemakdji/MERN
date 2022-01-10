@@ -8,6 +8,8 @@ import TabUser from '../../components/admin/tabs/User';
 
 
 
+
+
 function Admin() {
     return (
 
@@ -15,7 +17,7 @@ function Admin() {
         <div className="">
             <h1>BIENVENUE SUR L'ADMIN SPACE </h1>
             <hr className="my-5" />
-            <Tab.Container id="left-tabs-example"  defaultActiveKey="fourth">
+            <Tab.Container id="left-tabs-example"  defaultActiveKey="first">
                 <Row>
                     <Col sm={3}>
                         <Nav variant="pills"  className="flex-column">
@@ -47,6 +49,7 @@ function Admin() {
                             <Tab.Pane eventKey="fourth">
                                 <TabActu></TabActu>
                             </Tab.Pane>
+                            
                         </Tab.Content>
                     </Col>
                 </Row>

@@ -9,7 +9,7 @@ function Right() {
         <div className="row">
             <div className="col">
                 <div className="card"><img src={actu} alt="" />
-                    <a href="/#">actualités</a>
+                    <a href="/Actualites">Actualités</a>
                     <div className="card-body">
                     </div>
                 </div>

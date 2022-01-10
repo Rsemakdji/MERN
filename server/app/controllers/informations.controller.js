@@ -1,7 +1,7 @@
 const db = require("../models");
 const Informations = db.informations;
 
-// a reflechir si caté mieux
+
 // Create and Save a new informations
 exports.create = (req, res) => {
   // Validate request
@@ -33,8 +33,8 @@ exports.create = (req, res) => {
 
 // Retrieve all informations from the database.
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+  const id = req.query.id;
+  var condition = id ? { id: { $regex: new RegExp(id), $options: "i" } } : {};
 
   Informations.find(condition)
     .then(data => {
@@ -49,9 +49,10 @@ exports.findAll = (req, res) => {
 };
 // Find a single informations with an title
 exports.findOne = (req, res) => {
-  const title = req.params.title;
 
-  Informations.findById(title)
+  const id = req.params.id;
+
+  Informations.findById(id)
     .then(data => {
       if (!data)
         res.status(404).send({ message: "Not found information with title " + title });
@@ -64,7 +65,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Update a informations by the title in the request
+// Update a informations by the id in the request
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
@@ -72,9 +73,9 @@ exports.update = (req, res) => {
     });
   }
 
-  const title = req.params.title;
+  const id = req.params.id;
 
-  Informations.findByIdAndUpdate(title, req.body, { useFindAndModify: false })
+  Informations.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then(data => {
       if (!data) {
         res.status(404).send({
@@ -89,11 +90,11 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a informations with the specified title in the request
+// Delete a informations with the specified id in the request
 exports.delete = (req, res) => {
-  const title = req.params.title;
+  const id = req.params.id;
 
-  Informations.findByIdAndRemove(title, { useFindAndModify: false })
+  Informations.findByIdAndRemove(id, { useFindAndModify: false })
     .then(data => {
       if (!data) {
         res.status(404).send({

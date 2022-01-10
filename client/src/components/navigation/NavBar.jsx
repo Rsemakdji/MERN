@@ -10,7 +10,7 @@ function NavBar() {
 
   const [isAdmin, setIsAdmin] = useState(false);
 
-  async function getUserInformations() {
+   const getUserInformations = async () => {
     const storedJwt = localStorage.getItem("token");
     if (!storedJwt) {
       setIsAdmin(false);
@@ -21,7 +21,7 @@ function NavBar() {
         headers: { Authorization: `Bearer ${storedJwt}` }
       };
       const response = await axios.get("http://localhost:9001/api/users/getInfo", config);
-      console.log({ isAdmin: response.data.isAdmin });
+      // console.log({ isAdmin: response.data.isAdmin }); console log de si l'utilisateur est admin
       setIsAdmin(response.data.isAdmin);
     }
     catch (err) {
