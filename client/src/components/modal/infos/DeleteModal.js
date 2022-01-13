@@ -12,7 +12,7 @@ function DeleteModal(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
-    const title = useState(props.title);
+    const [title] = useState(props.title);
     //const id = useState(props.id);
     
 
@@ -41,7 +41,7 @@ function DeleteModal(props) {
                     <Button variant="secondary" onClick={handleClose}>
                         Retour
                     </Button>
-                    <Button variant="btn btn-danger" onClick={handleClose, handleDelete}>
+                    <Button variant="btn btn-danger" onClick={() => { handleClose(); handleDelete(); }}>
                         Supprimer
                     </Button>
                 </Modal.Footer>

@@ -10,26 +10,28 @@ function NavBar() {
 
   const [isAdmin, setIsAdmin] = useState(false);
 
-   const getUserInformations = async () => {
-    const storedJwt = localStorage.getItem("token");
-    if (!storedJwt) {
-      setIsAdmin(false);
-      return;
-    }
-    try {
-      const config = {
-        headers: { Authorization: `Bearer ${storedJwt}` }
-      };
-      const response = await axios.get("http://localhost:9001/api/users/getInfo", config);
-      // console.log({ isAdmin: response.data.isAdmin }); console log de si l'utilisateur est admin
-      setIsAdmin(response.data.isAdmin);
-    }
-    catch (err) {
-      console.log("Désolé il y a un problème de vévrification des informations utilisateur");
-    }
-  }
-
-  useEffect(getUserInformations, []); // la ligne du use effect a réctifier //
+  useEffect(() => {
+    const fetchData = async () => {
+      const storedJwt = localStorage.getItem("token");
+      
+      if (!storedJwt) {
+        setIsAdmin(false);
+        return;
+      }
+      try {
+        const config = {
+          headers: { Authorization: `Bearer ${storedJwt}` }
+        };
+        const response = await axios.get("http://localhost:9001/api/users/getInfo", config);
+        // console.log({ isAdmin: response.data.isAdmin }); console log de si l'utilisateur est admin
+        setIsAdmin(response.data.isAdmin);
+      }
+      catch (err) {
+        console.log("Désolé il y a un problème de vévrification des informations utilisateur");
+      }
+    };
+    fetchData();
+  }, []); 
 
 
   return (

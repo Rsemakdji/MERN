@@ -16,9 +16,11 @@ function UpdateModal(props) {
   const [description, setDescription] = useState(props.description);
 
   const handleUpdate = async () => {
-     const res = await axios.put("http://localhost:9001/api/informations/"+ props.id, { title, description });
-     alert('information modfié avec succes ')
-     window.location.href ="/Admin"
+    const editedInfo = { title, description };
+
+    await axios.put("http://localhost:9001/api/informations/" + props.id, editedInfo);
+    alert('information modfié avec succes ');
+    window.location.href = "/Admin";
   };
   
 
@@ -33,16 +35,18 @@ function UpdateModal(props) {
           <Modal.Title>Edition de "{title}"</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleUpdate}>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} ></input>
+        <form onSubmit={handleUpdate}>
+            <label>Titre</label>
+            <input type="text" className="form-control" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+            <label>Déscription</label>
+            <input type="text" className="form-control" value={description} onChange={(e) => setDescription(e.target.value)} ></input>
           </form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Annuler
           </Button>
-          <Button variant="primary" onClick={handleClose, handleUpdate}>
+          <Button variant="primary" onClick={() => { handleClose(); handleUpdate(); }}>
             Modifier
           </Button>
         </Modal.Footer>

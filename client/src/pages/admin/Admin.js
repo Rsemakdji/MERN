@@ -6,10 +6,6 @@ import TabInfos from '../../components/admin/tabs/Infos';
 import TabSection from '../../components/admin/tabs/Section';
 import TabUser from '../../components/admin/tabs/User';
 
-
-
-
-
 function Admin() {
     return (
 
@@ -17,7 +13,7 @@ function Admin() {
         <div className="">
             <h1>BIENVENUE SUR L'ADMIN SPACE </h1>
             <hr className="my-5" />
-            <Tab.Container id="left-tabs-example"  defaultActiveKey="first">
+            <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                 <Row>
                     <Col sm={3}>
                         <Nav variant="pills"  className="flex-column">

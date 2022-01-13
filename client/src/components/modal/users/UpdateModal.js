@@ -17,40 +17,51 @@ function UpdateModal(props) {
   const [firstname, setFirstname] = useState(props.firstname);
   const [email, setEmail] = useState(props.email);
   const [phone, setPhone] = useState(props.phone);
-  const [address, setAddress] = useState(props.adress);
+  const [address, setAddress] = useState(props.address || "");
   const [city, setCity] = useState(props.city);
   const [postal, setPostal] = useState(props.postal);
 
 
+
   const handleUpdate = async () => {
     const storedJwt = localStorage.getItem('token');
+    const editedUser = {
+      lastname,
+      firstname,
+      email,
+      phone,
+      address,
+      city,
+      postal,
+    };
+    
     if (storedJwt) {
       try {
         const config = {
           headers: { Authorization: `Bearer ${storedJwt}` }
         };
-        const res = await axios.put(`http://localhost:9001/api/users/${props.id}`, config);
-        alert('utilisateur modfié avec succes ')
-        window.location.href = "/Admin"
+        axios
+          .put("http://localhost:9001/api/users/" + props.id, editedUser, config )
+          .then(res => {
+            window.location.href = "/Admin";
+            // alert(`tu as modifié ${props.lastname} ${props.firstname}`)
+          });
       }
-      catch (err) {
-        // TODO : gérer les cas d'erreur
+      catch (err) { console.log(props.id)
       }
     } else {
       window.location.href("/Admin")
     }
   }
 
-
   return (
     <>
       <Button variant="btn btn-primary" onClick={handleShow}>
         Modifier
       </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Edition de "{lastname} {firstname}"</Modal.Title>
+          <Modal.Title >Edition de "<label className='text-primary'>{lastname} {firstname}</label>"</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleUpdate}>
@@ -76,7 +87,7 @@ function UpdateModal(props) {
           <Button variant="secondary" onClick={handleClose}>
             Annuler
           </Button>
-          <Button variant="primary" onClick={handleClose, handleUpdate}>
+          <Button variant="primary" onClick={() => { handleClose(); handleUpdate(); }}>
             Modifier
           </Button>
         </Modal.Footer>

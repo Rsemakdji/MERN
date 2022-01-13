@@ -7,7 +7,7 @@ import axios from 'axios';
 function TabActu() {
 
   const [data, setData] = useState([]);
-  
+
   useEffect(() => {
     const fetchDatas = async () => {
       const result = await axios.get('http://localhost:9001/api/actualites');
@@ -36,8 +36,8 @@ function TabActu() {
                 <tr key={item.id}>
                   <td>{item.title}</td>
                   <td>{item.description}</td>
-                  <td><div><UpdateModal id={item.id} title={item.title} description={item.description} ></UpdateModal></div></td>
-                  <td><div><DeleteModal id={item.id} title={item.title} description={item.description}></DeleteModal></div></td>
+                  <td><UpdateModal id={item.id} title={item.title} description={item.description} ></UpdateModal></td>
+                  <td><DeleteModal id={item.id} title={item.title}></DeleteModal></td>
                 </tr>
               )
           }

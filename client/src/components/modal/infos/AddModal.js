@@ -2,9 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 
-
-
-
 function AddModal() {
 
   const [show, setShow] = useState(false);
@@ -14,9 +11,7 @@ function AddModal() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
+  function handleSubmit() {
     const infos = { title, description };
 
     axios({
@@ -58,7 +53,7 @@ function AddModal() {
           <Button variant="secondary" onClick={handleClose}>
             annuler
           </Button>
-          <Button variant="primary" onClick={handleClose, handleSubmit} type='submit'>
+          <Button variant="primary" onClick={(e) => { handleClose(); handleSubmit(e); }} type='submit'>
             Créer
           </Button>
         </Modal.Footer>

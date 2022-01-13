@@ -16,6 +16,7 @@ exports.getInfo = async (req, res) => {
 
 // Log user and create JWT token
 exports.login = (req, res) => {
+  
   console.log(req.body);
 
   User.find({ email: req.body.email }).then((data) => {
@@ -146,7 +147,18 @@ exports.findOne = (req, res) => {
     .then(data => {
       if (!data)
         res.status(404).send({ message: "Not found User with id " + id });
-      else res.send(data);
+      else {
+        const foundUser = {
+          lastname : data.lastname,
+          firstname : data.firstname,
+          email : data.email,
+          phone : data.phone,
+          address : data.address,
+          city : data.city,
+          postal : data.postal,
+        }
+        res.send(foundUser);
+      }
     })
     .catch(err => {
       res
@@ -164,8 +176,17 @@ exports.update = (req, res) => {
   }
 
   const id = req.params.id;
+  const editedUser = {
+    lastname : req.body.lastname,
+    firstname : req.body.firstname,
+    email : req.body.email,
+    phone : req.body.phone,
+    address : req.body.address,
+    city : req.body.city,
+    postal : req.body.postal,
+  };
 
-  User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  User.findByIdAndUpdate(id, editedUser, { useFindAndModify: false })
     .then(data => {
       if (!data) {
         res.status(404).send({

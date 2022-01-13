@@ -13,8 +13,8 @@ function AddModal() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
+    
 
     const actualites = { title, description };
 
@@ -57,7 +57,7 @@ function AddModal() {
           <Button variant="secondary" onClick={handleClose}>
             Annuler
           </Button>
-          <Button variant="primary" onClick={handleClose, handleSubmit} type='submit'>
+          <Button variant="primary" onClick={() => { handleClose(); handleSubmit(); }} type='submit'>
             Créer
           </Button>
         </Modal.Footer>

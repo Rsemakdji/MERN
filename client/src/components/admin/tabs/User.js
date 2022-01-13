@@ -70,39 +70,27 @@ function TabUser() {
                                     <td>{item.postal}</td>
                                     <td>{item.isAdmin && "X"}</td>
                                     <td>
-                                        <div>
-                                            <UpdateModal
-                                                id={item.id}
-                                                lastname={item.lastname}
-                                                firstname={item.firstname}
-                                                email={item.email}
-                                                phone={item.phone}
-                                                adress={item.address}
-                                                city={item.city}
-                                                postal={item.postal}
-                                                isAdmin={item.isAdmin}
-                                            ></UpdateModal>
-                                        </div>
+                                        <UpdateModal
+                                            id={item.id}
+                                            lastname={item.lastname}
+                                            firstname={item.firstname}
+                                            email={item.email}
+                                            phone={item.phone}
+                                            address={item.address}
+                                            city={item.city}
+                                            postal={item.postal}
+                                        ></UpdateModal>
                                     </td>
                                     <td>
-                                        <div>
-                                            <DeleteModal
-                                                id={item.id}
-                                                lastname={item.lastname}
-                                                firstname={item.firstname}
-                                                email={item.email}
-                                                phone={item.phone}
-                                                address={item.address}
-                                                city={item.city}
-                                                postal={item.postal}
-                                                isAdmin={item.isAdmin}
-                                            ></DeleteModal>
-                                        </div>
+                                        <DeleteModal
+                                            id={item.id}
+                                            lastname={item.lastname}
+                                            firstname={item.firstname}
+                                        ></DeleteModal>
                                     </td>
                                 </tr>
                             )
                     }
-
                 </tbody>
             </table>
         </div>
