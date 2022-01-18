@@ -42,8 +42,7 @@ function TabUser() {
             <h1>Modification des utilisateurs </h1>
             <table border="1" className="table table-striped table-dark">
                 <tbody>
-                    <tr>
-                        <td>id</td>
+                    <tr>   
                         <td>Nom</td>
                         <td>Prenom</td>
                         <td>Email</td>
@@ -55,12 +54,10 @@ function TabUser() {
                         <td>Modifier</td>
                         <td>Supprimer</td>
                     </tr>
-
                     {
                         data
                             .map((item) =>
                                 <tr key={item.id}>
-                                    <td>{item.id}</td>
                                     <td>{item.lastname}</td>
                                     <td>{item.firstname}</td>
                                     <td>{item.email}</td>

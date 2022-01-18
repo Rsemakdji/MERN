@@ -1,6 +1,5 @@
 import React from 'react';
 import { Formik, Field, Form } from 'formik';
-
 import axios from 'axios';
 
 
@@ -9,7 +8,9 @@ import axios from 'axios';
 const SignIn = () => {
 
   const handleSubmit = (data) => {
-
+    // mettre le crypt dans une config .
+    // const salt = bcrypt.genSaltSync(10);
+    // const hashedPassword = bcrypt.hashSync(data.password, salt);
     axios({
       method: 'post',
       url: 'http://localhost:9001/api/users/login',
@@ -26,7 +27,6 @@ const SignIn = () => {
         alert("Problème d'authentification, le mail ou le mot de passe est incorrect");
       });
   }
-
   return (
     <div>
       <h1>Connectez-vous</h1>

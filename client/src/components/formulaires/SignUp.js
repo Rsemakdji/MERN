@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import bcrypt from 'bcryptjs';
 
 
 
@@ -12,21 +13,26 @@ class SignUp extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
     handleSubmit(data) {
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(data.password, salt);
+        const hashedConfirmPassword = bcrypt.hashSync(data.confirmPassword, salt);
         axios({
             method: 'post',
             url: 'http://localhost:9001/api/users/signup',
-            data: data
+            data: { ...data, password: hashedPassword, confirmPassword: hashedConfirmPassword }
         })
             .then(function (response) {
-                window.location.href = "/Connexion";
-
+                //window.location.href = "/Connexion";
+                console.log(data.lastname);
             })
             .catch(function (err) {
                 alert("Impossible de créer le compte, le mail existe déjà");
             });
     }
+
+
+
 
     validationSchema() {
         return Yup.object().shape({
@@ -58,6 +64,7 @@ class SignUp extends React.Component {
     }
 
     render() {
+
         const initialValues = {
             lastname: '',
             firstname: '',
@@ -77,7 +84,6 @@ class SignUp extends React.Component {
                         initialValues={initialValues}
                         validationSchema={this.validationSchema}
                         onSubmit={this.handleSubmit}>
-
                         {
                             <Form>
                                 <div className="form-group">
@@ -134,7 +140,7 @@ class SignUp extends React.Component {
                                 <div className="form-group form-check"><br />
                                     <Field name="acceptTerms" type="checkbox" className="form-check-input" />
                                     <label htmlFor="acceptTerms" className="form-check-label">
-                                        j'accepte les conditions d'utilisation 
+                                        j'accepte les conditions d'utilisation
                                     </label>
                                     <ErrorMessage name="acceptTerms" component="div" className="text-danger" />
                                 </div>

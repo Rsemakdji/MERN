@@ -226,6 +226,7 @@ exports.delete = (req, res) => {
 
 // Delete all Users from the database.
 exports.deleteAll = (req, res) => {
+  
   User.deleteMany({})
     .then(data => {
       res.send({

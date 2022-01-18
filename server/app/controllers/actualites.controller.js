@@ -1,7 +1,7 @@
 const db = require("../models");
 const Actualites = db.actualites;
 
-// a reflechir si caté mieux
+
 // Create and Save a new informations
 exports.create = (req, res) => {
   // Validate request

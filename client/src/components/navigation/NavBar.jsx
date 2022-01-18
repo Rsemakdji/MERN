@@ -4,8 +4,6 @@ import render from '../../images/render.png';
 import axios from 'axios';
 
 
-
-
 function NavBar() {
 
   const [isAdmin, setIsAdmin] = useState(false);
@@ -33,10 +31,10 @@ function NavBar() {
     fetchData();
   }, []); 
 
+  
 
   return (
     <Fragment>
-
       <Navbar className="Navbar" expand="lg"  >
         <Navbar.Brand href="/" > <img className="d-inline-block align-top" alt="logo club" width="80" height="80" src={render} /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -48,7 +46,6 @@ function NavBar() {
               <NavDropdown.Item href="Dojo">LE DOJO</NavDropdown.Item>
               <NavDropdown.Item href="LHT">LICENCES HORAIRES TARIFS</NavDropdown.Item>
               <NavDropdown.Item href="/Infos">INFORMATIONS IMPORTANTES</NavDropdown.Item>
-
 
             </NavDropdown>
             <NavDropdown title="ACTIVITES" id="basic-nav-dropdown">
@@ -67,6 +64,7 @@ function NavBar() {
     </Fragment>
   )
 }
+export default NavBar;
 
 
 
@@ -94,4 +92,3 @@ function NavBar() {
 
 
 
-export default NavBar;
